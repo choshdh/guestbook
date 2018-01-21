@@ -28,19 +28,22 @@
 
 	GuestBookDAO dao = new GuestBookDAO();
 	List<GuestBookVO> l = dao.selectAllGuestBook();
-	for(GuestBookVO e : l) { %>
+	
+	if(l!=null){
+		for(GuestBookVO e : l) { %>
 			<table width=510 border=1>
 				<tr>
 					<td><%= e.getNo() %></td>
 					<td><%= e.getName() %></td>
 					<td><%= e.getDate() %></td>
-					<td><a href="deleteform.jsp?no=">삭제</a></td>
+					<td><a href="deleteform.jsp?no=<%= e.getNo()%>">삭제</a></td>
 				</tr>
 				<tr>
 					<td colspan=4><%= e.getContent() %></td>
 				</tr>
 			</table>
 		    <br/>
-<%	} %>
+<%		} 
+	}%>
 </body>
 </html>

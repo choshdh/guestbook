@@ -2,11 +2,11 @@ package com.javaex.vo;
 
 public class GuestBookVO {
 
-	int no;
-	String name;
-	String password;
-	String content;
-	String regDate;
+	private int no;
+	private String name;
+	private String password;
+	private String content;
+	private String regDate;
 	
 	public GuestBookVO() {
 		// TODO Auto-generated constructor stub

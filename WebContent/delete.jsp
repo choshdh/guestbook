@@ -1,12 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page import = "com.javaex.dao.*" %>
+<%@ page import = "com.javaex.vo.*" %>
 
-</body>
-</html>
+<%
+	int getno = Integer.valueOf(request.getParameter("no"));
+	String password = request.getParameter("password");
+	GuestBookDAO dao = new GuestBookDAO();
+	GuestBookVO vo = dao.selectGuestBook(getno);
+	System.out.println(password);
+	System.out.println(vo.getPassword());
+	if(password.equals(vo.getPassword())){
+		dao.deleteGuestBook(getno);
+		response.sendRedirect("list.jsp");
+	}else{
+		response.sendRedirect("deletefail.html");
+	}
+%>

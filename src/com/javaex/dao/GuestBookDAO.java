@@ -21,7 +21,7 @@ public class GuestBookDAO {
 		connect();
 		try {
 			// 3. SQL문 준비 / 바인딩 / 실행
-			String query = "insert into guestbook values(seq_guestbook_no.nextval, ? , ? , sysdate , ?)"; 
+			String query = "insert into guestbook values(seq_guestbook_no.nextval, ? , ? , ? ,  sysdate)"; 
 			pstmt = conn.prepareStatement(query); 
 			pstmt.setString(1, vo.getName()); 
 			pstmt.setString(2, vo.getPassword());
@@ -65,6 +65,44 @@ public class GuestBookDAO {
 				l.add(vo);
 			}
 			return l;
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+			return null;
+			
+		} finally {
+			close();
+		}
+
+	}
+	
+	public GuestBookVO selectGuestBook(int getno) {
+		// 0. import java.sql.*;
+		connect();
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+			String query = "select * from guestbook where no = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, getno);
+			rs = pstmt.executeQuery();
+			
+			GuestBookVO vo = new GuestBookVO();
+			// 4.결과처리
+			while(rs.next()) {
+				
+				int no = rs.getInt("no");
+				String name = rs.getString("name");
+				String password = rs.getString("password");
+				String content = rs.getString("content");
+				String regDate = rs.getString("reg_date");
+				
+				vo.setNo(no);
+				vo.setName(name);
+				vo.setPassword(password);
+				vo.setContent(content);
+				vo.setDate(regDate);
+			}
+			return vo;
 			
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
@@ -122,6 +160,8 @@ public class GuestBookDAO {
 	}
 	
 
+
+	
 	private void connect() {
 		try {
 			// 1. JDBC 드라이버 (Oracle) 로딩
