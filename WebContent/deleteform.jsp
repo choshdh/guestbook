@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="post" action="delete.jsp">
+	<form method="post" action="Delete">
 	<input type='text' name="no" value="<%=no%>" size="5"> 번 글을 삭제 하시려면 비밀번호를 입력해주세요
 	<table>
 		<tr>
