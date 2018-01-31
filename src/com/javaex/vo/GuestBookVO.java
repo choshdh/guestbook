@@ -12,16 +12,12 @@ public class GuestBookVO {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-
 	public GuestBookVO(String name, String password, String content) {
 		super();
 		this.name = name;
 		this.password = password;
 		this.content = content;
 	}
-
-
 
 	public int getNo() {
 		return no;
